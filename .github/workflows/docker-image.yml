@@ -25,33 +25,32 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-        # Fail the job if login fails
         continue-on-error: false
 
       # 4️⃣ Build and push backend image
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: ./backend-practice
-          file: ./backend-practice/backend.Dockerfile
+          context: ./backend-springbootapp
+          file: ./backend-springbootapp/backend.Dockerfile
           push: true
           platforms: linux/amd64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/docker-backend2:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/docker-backend2:${{ github.sha }}
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/docker-backend2:latest
-          cache-to: type=registry,mode=max,ref=${{ secrets.DOCKERHUB_USERNAME }}/docker-backend2:cache
+            ${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-backend:final
+            ${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-backend:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-backend:final
+          cache-to: type=registry,mode=max,ref=${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-backend:cache
 
       # 5️⃣ Build and push frontend image
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend-practice
-          file: ./frontend-practice/frontend.Dockerfile
+          context: ./frontend-reactapp
+          file: ./frontend-reactapp/frontend.Dockerfile
           push: true
           platforms: linux/amd64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/docker-frontend2:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/docker-frontend2:${{ github.sha }}
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/docker-frontend2:latest
-          cache-to: type=registry,mode=max,ref=${{ secrets.DOCKERHUB_USERNAME }}/docker-frontend2:cache
+            ${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-frontend:final
+            ${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-frontend:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-frontend:final
+          cache-to: type=registry,mode=max,ref=${{ secrets.DOCKERHUB_USERNAME }}/2300030326-exam-frontend:cache
