@@ -19,6 +19,9 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 
+
 EXPOSE 2000
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
+#ENTRYPOINT ["java", "-jar", "backend-springbootapp-0.0.1-SNAPSHOT.jar"]
+
